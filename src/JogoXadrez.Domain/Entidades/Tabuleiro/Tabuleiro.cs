@@ -2,15 +2,19 @@ namespace JogoXadrez.Domain.Entidades.Tabuleiro
 {
     public class Tabuleiro
     {
-        public int linhas { get; private set; }
-        public int colunas { get; private set; }
-        public Peca[,] pecas { get; private set; }
+        public int Linhas { get; private set; }
+        public int Colunas { get; private set; }
+        public Peca[,] Pecas { get; private set; }
 
         public Tabuleiro(int linhas, int colunas)
         {
-            this.linhas = linhas;
-            this.colunas = colunas;
-            this.pecas = new Peca[linhas, colunas];
+            this.Linhas = linhas;
+            this.Colunas = colunas;
+            this.Pecas = new Peca[linhas, colunas];
+        }
+
+        public Peca getPeca(int linha, int coluna){
+            return this.Pecas[linha, coluna];
         }
     }
 }

@@ -13,7 +13,7 @@ namespace JogoXadrez.Domain.Entidades.Tabuleiro
 
         public override string ToString()
         {
-            return $"{linha}, {posicao}";
+            return $"{linha}, {coluna}";
         }
     }
 }

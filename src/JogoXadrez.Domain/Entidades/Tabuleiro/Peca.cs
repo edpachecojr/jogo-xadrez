@@ -1,3 +1,5 @@
+using JogoXadrez.Domain.Enums;
+
 namespace JogoXadrez.Domain.Entidades.Tabuleiro
 {
     public class Peca
@@ -7,7 +9,7 @@ namespace JogoXadrez.Domain.Entidades.Tabuleiro
         public int QuantidadeMovimentos { get; private set; }
         public Tabuleiro Tabuleiro { get; private set; }
 
-        public Peca(Posicao posicao, Tabuleiro tabuleiro, Cor cor)
+        public Peca(Posicao posicao, Tabuleiro tabuleiro, CorEnum cor)
         {
             this.Posicao = posicao;
             this.Tabuleiro = tabuleiro;
