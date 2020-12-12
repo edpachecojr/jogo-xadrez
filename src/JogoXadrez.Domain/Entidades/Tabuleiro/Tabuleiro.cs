@@ -13,8 +13,15 @@ namespace JogoXadrez.Domain.Entidades.Tabuleiro
             this.Pecas = new Peca[linhas, colunas];
         }
 
-        public Peca getPeca(int linha, int coluna){
+        public Peca getPeca(int linha, int coluna)
+        {
             return this.Pecas[linha, coluna];
+        }
+
+        public void AdicionarPeca(Peca peca, Posicao posicao)
+        {
+            this.Pecas[posicao.Linha, posicao.Coluna] = peca;
+            peca.AlteraPosicao(posicao);
         }
     }
 }

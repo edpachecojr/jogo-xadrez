@@ -9,12 +9,17 @@ namespace JogoXadrez.Domain.Entidades.Tabuleiro
         public int QuantidadeMovimentos { get; private set; }
         public Tabuleiro Tabuleiro { get; private set; }
 
-        public Peca(Posicao posicao, Tabuleiro tabuleiro, CorEnum cor)
+        public Peca(Tabuleiro tabuleiro, CorEnum cor)
         {
-            this.Posicao = posicao;
+            this.Posicao = null;
             this.Tabuleiro = tabuleiro;
             this.Cor = cor;
             this.QuantidadeMovimentos = 0;
+        }
+
+        public void AlteraPosicao(Posicao posicao)
+        {
+            this.Posicao = posicao;
         }
     }
 }
