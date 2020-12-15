@@ -4,6 +4,7 @@ using JogoXadrez.Domain.Entidades.Tabuleiro;
 using JogoXadrez.Domain.Entidades.Xadrez;
 using JogoXadrez.Domain.Enums;
 using JogoXadrez.Domain.Excecoes;
+using JogoXadrez.Domain.Servicos;
 
 namespace ConsoleApp
 {
@@ -13,21 +14,29 @@ namespace ConsoleApp
         {
             try
             {
-                Tabuleiro tabuleiro = new Tabuleiro(8, 8);
-                tabuleiro.AdicionarPeca(new Torre(tabuleiro, CorEnum.Preta), new Posicao(0, 0));
-                tabuleiro.AdicionarPeca(new Torre(tabuleiro, CorEnum.Preta), new Posicao(1, 3));
-                tabuleiro.AdicionarPeca(new Rei(tabuleiro, CorEnum.Preta), new Posicao(2, 4));
-                tabuleiro.AdicionarPeca(new Rei(tabuleiro, CorEnum.Branca), new Posicao(3, 5));
-                tabuleiro.AdicionarPeca(new Torre(tabuleiro, CorEnum.Branca), new Posicao(3, 3));
+                PartidaDeXadrez partida = new PartidaDeXadrez();
 
-                TelaService.ImprimirTabuleiro(tabuleiro);
-                Console.ReadLine();
+                while (!partida.Terminada)
+                {
+                    Console.Clear();
+                    TelaService.ImprimirTabuleiro(partida.Tabuleiro);
+
+                    Console.Write("Origem: ");
+                    Posicao origem = TelaService.LerPosicaoXadrez().ToPosicao();
+
+                    Console.Write("Destino: ");
+                    Posicao destino = TelaService.LerPosicaoXadrez().ToPosicao();
+
+                    partida.ExecutaMovimento(origem, destino);
+                }
+
 
             }
             catch (TabuleiroException e)
             {
                 Console.WriteLine(e.Message);
             }
+            Console.ReadLine();
         }
     }
 }

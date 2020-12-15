@@ -1,3 +1,4 @@
+using System;
 using JogoXadrez.Domain.Enums;
 
 namespace JogoXadrez.Domain.Entidades.Tabuleiro
@@ -20,6 +21,16 @@ namespace JogoXadrez.Domain.Entidades.Tabuleiro
         public void AlteraPosicao(Posicao posicao)
         {
             this.Posicao = posicao;
+        }
+
+        public void SetPosicaoNull()
+        {
+            Posicao = null;
+        }
+
+        public void IncrementarQuantidadeMovimentos()
+        {
+            this.QuantidadeMovimentos++;
         }
     }
 }

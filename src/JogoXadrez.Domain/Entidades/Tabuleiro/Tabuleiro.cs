@@ -15,11 +15,11 @@ namespace JogoXadrez.Domain.Entidades.Tabuleiro
             this.Pecas = new Peca[linhas, colunas];
         }
 
-        public Peca getPeca(int linha, int coluna)
+        public Peca GetPeca(int linha, int coluna)
         {
             return this.Pecas[linha, coluna];
         }
-        public Peca getPeca(Posicao posicao)
+        public Peca GetPeca(Posicao posicao)
         {
             return this.Pecas[posicao.Linha, posicao.Coluna];
         }
@@ -34,10 +34,23 @@ namespace JogoXadrez.Domain.Entidades.Tabuleiro
             peca.AlteraPosicao(posicao);
         }
 
+        public Peca RetirarPeca(Posicao posicao)
+        {
+            if (GetPeca(posicao) == null)
+            {
+                return null;
+            }
+            Peca aux = GetPeca(posicao);
+            aux.SetPosicaoNull();
+            Pecas[posicao.Linha, posicao.Coluna] = null;
+
+            return aux;
+        }
+
         public bool ExistePeca(Posicao posicao)
         {
             ValidarPosicao(posicao);
-            return this.getPeca(posicao) != null;
+            return this.GetPeca(posicao) != null;
         }
 
         public bool PosicaoValida(Posicao posicao)

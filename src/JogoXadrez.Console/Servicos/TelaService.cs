@@ -1,5 +1,6 @@
 using System;
 using JogoXadrez.Domain.Entidades.Tabuleiro;
+using JogoXadrez.Domain.Entidades.Xadrez;
 using JogoXadrez.Domain.Enums;
 
 namespace JogoXadrez.ConsoleApp.Servicos
@@ -13,13 +14,13 @@ namespace JogoXadrez.ConsoleApp.Servicos
                 Console.Write(8 - i + " ");
                 for (int j = 0; j < tabuleiro.Colunas; j++)
                 {
-                    if (tabuleiro.getPeca(i, j) == null)
+                    if (tabuleiro.GetPeca(i, j) == null)
                     {
                         Console.Write("- ");
                     }
                     else
                     {
-                        ImprimirPeca(tabuleiro.getPeca(i, j));
+                        ImprimirPeca(tabuleiro.GetPeca(i, j));
                         Console.Write(" ");
                     }
                 }
@@ -41,6 +42,14 @@ namespace JogoXadrez.ConsoleApp.Servicos
                 Console.Write(peca);
                 Console.ForegroundColor = aux;
             }
+        }
+
+        public static PosicaoXadrez LerPosicaoXadrez()
+        {
+            string s = Console.ReadLine();
+            char coluna = s[0];
+            int linha = int.Parse(s[1] + "");
+            return new PosicaoXadrez(coluna, linha);
         }
     }
 }
