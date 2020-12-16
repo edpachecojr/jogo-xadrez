@@ -50,6 +50,11 @@ namespace JogoXadrez.Domain.Entidades.Tabuleiro
             return false;
         }
 
+        public bool PodeMoverPara(Posicao posicao)
+        {
+            return this.MovimentosPossiveis()[posicao.Linha, posicao.Coluna];
+        }
+
         public abstract bool[,] MovimentosPossiveis();
     }
 }

@@ -39,6 +39,7 @@ namespace ConsoleApp
                         Console.WriteLine();
                         Console.Write("Destino: ");
                         Posicao destino = TelaService.LerPosicaoXadrez().ToPosicao();
+                        partida.ValidarPosicaoDestino(origem, destino);
 
                         partida.RealizaJogada(origem, destino);
                     }

@@ -51,6 +51,13 @@ namespace JogoXadrez.Domain.Servicos
                 throw new TabuleiroException("Não é movimentos possíveis para a peça escolhida!");
             }
         }
+        public void ValidarPosicaoDestino(Posicao origem, Posicao destino)
+        {
+            if (!this.Tabuleiro.GetPeca(origem).PodeMoverPara(destino))
+            {
+                throw new TabuleiroException("Posição de destino inválida!");
+            }
+        }
         private void MudaJogador()
         {
             if (this._jogadorAtual == CorEnum.Branca)
