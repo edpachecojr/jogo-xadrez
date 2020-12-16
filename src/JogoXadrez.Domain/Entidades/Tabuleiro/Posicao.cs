@@ -21,5 +21,22 @@ namespace JogoXadrez.Domain.Entidades.Tabuleiro
             this.Linha = linha;
             this.Coluna = coluna;
         }
+
+        public void MoverPosicaoAcima()
+        {
+            this.Linha--;
+        }
+        public void MoverPosicaoAbaixo()
+        {
+            this.Linha--;
+        }
+        public void MoverPosicaoDireita()
+        {
+            this.Coluna++;
+        }
+        public void MoverPosicaoEsquerda()
+        {
+            this.Coluna--;
+        }
     }
 }
