@@ -3,7 +3,7 @@ using JogoXadrez.Domain.Enums;
 
 namespace JogoXadrez.Domain.Entidades.Tabuleiro
 {
-    public class Peca
+    public abstract class Peca
     {
         public Posicao Posicao { get; private set; }
         public CorEnum Cor { get; protected set; }
@@ -32,5 +32,7 @@ namespace JogoXadrez.Domain.Entidades.Tabuleiro
         {
             this.QuantidadeMovimentos++;
         }
+
+        public abstract bool[,] MovimentosPossiveis();
     }
 }
