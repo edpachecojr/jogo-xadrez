@@ -1,6 +1,7 @@
 using JogoXadrez.Domain.Entidades.Tabuleiro;
 using JogoXadrez.Domain.Entidades.Xadrez;
 using JogoXadrez.Domain.Enums;
+using JogoXadrez.Domain.Excecoes;
 
 namespace JogoXadrez.Domain.Servicos
 {
@@ -35,6 +36,21 @@ namespace JogoXadrez.Domain.Servicos
             this.MudaJogador();
         }
 
+        public void ValidarPosicaoOrigem(Posicao posicao)
+        {
+            if (this.Tabuleiro.GetPeca(posicao) == null)
+            {
+                throw new TabuleiroException("Não existe peça na posição de origem escolhida!");
+            }
+            if (this._jogadorAtual != this.Tabuleiro.GetPeca(posicao).Cor)
+            {
+                throw new TabuleiroException("A peça de origem escolhida não é sua!");
+            }
+            if (!this.Tabuleiro.GetPeca(posicao).ExisteMovimentosPossiveis())
+            {
+                throw new TabuleiroException("Não é movimentos possíveis para a peça escolhida!");
+            }
+        }
         private void MudaJogador()
         {
             if (this._jogadorAtual == CorEnum.Branca)

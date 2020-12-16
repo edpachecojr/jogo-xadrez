@@ -33,6 +33,23 @@ namespace JogoXadrez.Domain.Entidades.Tabuleiro
             this.QuantidadeMovimentos++;
         }
 
+        public bool ExisteMovimentosPossiveis()
+        {
+            bool[,] matriz = MovimentosPossiveis();
+            for (int i = 0; i < this.Tabuleiro.Linhas; i++)
+            {
+                for (int j = 0; j < this.Tabuleiro.Colunas; j++)
+                {
+                    if (matriz[i, j])
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
         public abstract bool[,] MovimentosPossiveis();
     }
 }
