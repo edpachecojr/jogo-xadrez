@@ -27,7 +27,7 @@ namespace JogoXadrez.Domain.Entidades.Xadrez
             Posicao posicao = new Posicao(0, 0);
 
             // acima
-            posicao.DefinirValores(posicao.Linha - 1, posicao.Coluna);
+            posicao.DefinirValores(this.Posicao.Linha - 1, this.Posicao.Coluna);
             while (this.Tabuleiro.PosicaoValida(posicao) && this.PodeMover(posicao))
             {
                 MatrizMovimentosPossiveis[posicao.Linha, posicao.Coluna] = true;
@@ -35,11 +35,11 @@ namespace JogoXadrez.Domain.Entidades.Xadrez
                 {
                     break;
                 }
-                posicao.DefinirValores(posicao.Linha - 1, posicao.Coluna);
+                posicao.MoverPosicaoAcima();
             }
 
             // abaixo
-            posicao.DefinirValores(posicao.Linha + 1, posicao.Coluna);
+            posicao.DefinirValores(this.Posicao.Linha + 1, this.Posicao.Coluna);
             while (this.Tabuleiro.PosicaoValida(posicao) && this.PodeMover(posicao))
             {
                 MatrizMovimentosPossiveis[posicao.Linha, posicao.Coluna] = true;
@@ -47,11 +47,11 @@ namespace JogoXadrez.Domain.Entidades.Xadrez
                 {
                     break;
                 }
-                posicao.DefinirValores(posicao.Linha + 1, posicao.Coluna);
+                posicao.MoverPosicaoAbaixo();
             }
 
             // direita
-            posicao.DefinirValores(posicao.Linha, posicao.Coluna + 1);
+            posicao.DefinirValores(this.Posicao.Linha, this.Posicao.Coluna + 1);
             while (this.Tabuleiro.PosicaoValida(posicao) && this.PodeMover(posicao))
             {
                 MatrizMovimentosPossiveis[posicao.Linha, posicao.Coluna] = true;
@@ -59,11 +59,11 @@ namespace JogoXadrez.Domain.Entidades.Xadrez
                 {
                     break;
                 }
-                posicao.DefinirValores(posicao.Linha, posicao.Coluna + 1);
+                posicao.MoverPosicaoDireita();
             }
 
             // esquerda
-            posicao.DefinirValores(posicao.Linha, posicao.Coluna - 1);
+            posicao.DefinirValores(this.Posicao.Linha, this.Posicao.Coluna - 1);
             while (this.Tabuleiro.PosicaoValida(posicao) && this.PodeMover(posicao))
             {
                 MatrizMovimentosPossiveis[posicao.Linha, posicao.Coluna] = true;
@@ -71,7 +71,7 @@ namespace JogoXadrez.Domain.Entidades.Xadrez
                 {
                     break;
                 }
-                posicao.DefinirValores(posicao.Linha, posicao.Coluna - 1);
+                posicao.MoverPosicaoEsquerda();
             }
 
             return MatrizMovimentosPossiveis;
