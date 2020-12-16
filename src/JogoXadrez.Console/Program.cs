@@ -24,6 +24,12 @@ namespace ConsoleApp
                     Console.Write("Origem: ");
                     Posicao origem = TelaService.LerPosicaoXadrez().ToPosicao();
 
+                    bool[,] posicoesPossiveis = partida.Tabuleiro.GetPeca(origem).MovimentosPossiveis();
+
+                    Console.Clear();
+                    TelaService.ImprimirTabuleiro(partida.Tabuleiro, posicoesPossiveis);
+
+                    Console.WriteLine();
                     Console.Write("Destino: ");
                     Posicao destino = TelaService.LerPosicaoXadrez().ToPosicao();
 
