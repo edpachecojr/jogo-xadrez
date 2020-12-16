@@ -20,6 +20,9 @@ namespace ConsoleApp
                 {
                     Console.Clear();
                     TelaService.ImprimirTabuleiro(partida.Tabuleiro);
+                    Console.WriteLine();
+                    Console.WriteLine("Turno: " + partida.Turno);
+                    Console.WriteLine("Aguardando jogada: " + partida.JogadorAtual);
 
                     Console.Write("Origem: ");
                     Posicao origem = TelaService.LerPosicaoXadrez().ToPosicao();
@@ -33,7 +36,7 @@ namespace ConsoleApp
                     Console.Write("Destino: ");
                     Posicao destino = TelaService.LerPosicaoXadrez().ToPosicao();
 
-                    partida.ExecutaMovimento(origem, destino);
+                    partida.RealizaJogada(origem, destino);
                 }
 
 

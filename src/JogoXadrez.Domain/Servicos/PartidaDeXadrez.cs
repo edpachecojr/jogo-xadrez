@@ -28,6 +28,25 @@ namespace JogoXadrez.Domain.Servicos
             this._tabuleiro.AdicionarPeca(peca, destino);
         }
 
+        public void RealizaJogada(Posicao origem, Posicao destino)
+        {
+            this.ExecutaMovimento(origem, destino);
+            this._turno++;
+            this.MudaJogador();
+        }
+
+        private void MudaJogador()
+        {
+            if (this._jogadorAtual == CorEnum.Branca)
+            {
+                this._jogadorAtual = CorEnum.Preta;
+            }
+            else
+            {
+                this._jogadorAtual = CorEnum.Branca;
+            }
+        }
+
         private void ColocarPecas()
         {
             this._tabuleiro.AdicionarPeca(new Torre(this._tabuleiro, CorEnum.Branca), new PosicaoXadrez('c', 1).ToPosicao());
@@ -53,6 +72,14 @@ namespace JogoXadrez.Domain.Servicos
         public bool Terminada
         {
             get { return this._terminada; }
+        }
+        public int Turno
+        {
+            get { return this._turno; }
+        }
+        public CorEnum JogadorAtual
+        {
+            get { return this._jogadorAtual; }
         }
     }
 }
