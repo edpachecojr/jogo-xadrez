@@ -22,10 +22,7 @@ namespace ConsoleApp
                     {
 
                         Console.Clear();
-                        TelaService.ImprimirTabuleiro(partida.Tabuleiro);
-                        Console.WriteLine();
-                        Console.WriteLine("Turno: " + partida.Turno);
-                        Console.WriteLine("Aguardando jogada: " + partida.JogadorAtual);
+                        TelaService.ImprimirPartida(partida);
 
                         Console.Write("Origem: ");
                         Posicao origem = TelaService.LerPosicaoXadrez().ToPosicao();
