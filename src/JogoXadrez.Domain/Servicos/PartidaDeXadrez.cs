@@ -14,6 +14,7 @@ namespace JogoXadrez.Domain.Servicos
         private bool _terminada;
         public HashSet<Peca> Pecas { get; private set; }
         public HashSet<Peca> Capturadas { get; private set; }
+        public bool PartidaEmXeque { get; private set; }
 
         public PartidaDeXadrez()
         {
@@ -21,12 +22,13 @@ namespace JogoXadrez.Domain.Servicos
             this._turno = 1;
             this._jogadorAtual = CorEnum.Branca;
             this._terminada = false;
+            PartidaEmXeque = false;
             Pecas = new HashSet<Peca>();
             Capturadas = new HashSet<Peca>();
             ColocarPecas();
         }
 
-        public void ExecutaMovimento(Posicao origem, Posicao destino)
+        public Peca ExecutaMovimento(Posicao origem, Posicao destino)
         {
             Peca peca = this._tabuleiro.RetirarPeca(origem);
             peca.IncrementarQuantidadeMovimentos();
@@ -36,11 +38,41 @@ namespace JogoXadrez.Domain.Servicos
             {
                 this.Capturadas.Add(pecaCapturada);
             }
+
+            return pecaCapturada;
+        }
+
+        public void DesfazMovimento(Posicao origem, Posicao destino, Peca pecaCapturada)
+        {
+            Peca peca = this._tabuleiro.RetirarPeca(destino);
+            peca.DecrementarQuantidadeMovimentos();
+            if (pecaCapturada != null)
+            {
+                this._tabuleiro.AdicionarPeca(pecaCapturada, destino);
+                this.Capturadas.Remove(pecaCapturada);
+            }
+            this._tabuleiro.AdicionarPeca(peca, origem);
         }
 
         public void RealizaJogada(Posicao origem, Posicao destino)
         {
-            this.ExecutaMovimento(origem, destino);
+
+            Peca pecaCapturada = this.ExecutaMovimento(origem, destino);
+            if (EstaEmXeque(JogadorAtual))
+            {
+                DesfazMovimento(origem, destino, pecaCapturada);
+                throw new TabuleiroException("Você não pode se colocar em xeque!");
+            }
+
+            CorEnum adversario = Adversario(JogadorAtual);
+            if (EstaEmXeque(adversario))
+            {
+                this.PartidaEmXeque = true;
+            }
+            else
+            {
+                this.PartidaEmXeque = false;
+            }
             this._turno++;
             this.MudaJogador();
         }
@@ -145,6 +177,43 @@ namespace JogoXadrez.Domain.Servicos
         public CorEnum JogadorAtual
         {
             get { return this._jogadorAtual; }
+        }
+
+        private CorEnum Adversario(CorEnum cor)
+        {
+            return cor == CorEnum.Branca ? CorEnum.Preta : CorEnum.Branca;
+        }
+
+        private Peca GetRei(CorEnum cor)
+        {
+            foreach (Peca x in PecasEmJogo(cor))
+            {
+                if (x is Rei)
+                {
+                    return x;
+                }
+            }
+            return null;
+        }
+
+        public bool EstaEmXeque(CorEnum cor)
+        {
+            Peca rei = GetRei(cor);
+            if (rei == null)
+            {
+                throw new TabuleiroException($"Não tem rei da cor {cor} no tabuleiro!");
+            }
+
+            foreach (Peca x in PecasEmJogo(Adversario(cor)))
+            {
+                bool[,] matriz = x.MovimentosPossiveis();
+                if (matriz[rei.Posicao.Linha, rei.Posicao.Coluna])
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

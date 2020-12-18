@@ -32,6 +32,10 @@ namespace JogoXadrez.Domain.Entidades.Tabuleiro
         {
             this.QuantidadeMovimentos++;
         }
+        public void DecrementarQuantidadeMovimentos()
+        {
+            this.QuantidadeMovimentos--;
+        }
 
         public bool ExisteMovimentosPossiveis()
         {
