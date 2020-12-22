@@ -73,8 +73,17 @@ namespace JogoXadrez.Domain.Servicos
             {
                 this.PartidaEmXeque = false;
             }
-            this._turno++;
-            this.MudaJogador();
+
+            if (this.VerificaXequeMate(this.Adversario(JogadorAtual)))
+            {
+                this._terminada = true;
+            }
+            else
+            {
+                this._turno++;
+                this.MudaJogador();
+
+            }
         }
 
         public void ValidarPosicaoOrigem(Posicao posicao)
@@ -215,5 +224,35 @@ namespace JogoXadrez.Domain.Servicos
 
             return false;
         }
+        public bool VerificaXequeMate(CorEnum cor)
+        {
+            if (this.EstaEmXeque(cor))
+            {
+                return false;
+            }
+            foreach (Peca x in this.PecasEmJogo(cor))
+            {
+                bool[,] mat = x.MovimentosPossiveis();
+                for (int i = 0; i < this._tabuleiro.Linhas; i++)
+                {
+                    for (int j = 0; j < this._tabuleiro.Colunas; j++)
+                    {
+                        if (mat[i, j])
+                        {
+                            Posicao destino = new Posicao(i, j);
+                            Peca pecaCapturada = this.ExecutaMovimento(x.Posicao, destino);
+                            bool testeXeque = this.EstaEmXeque(cor);
+                            this.DesfazMovimento(x.Posicao, destino, pecaCapturada);
+                            if (!testeXeque)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
+        }
     }
+
 }
