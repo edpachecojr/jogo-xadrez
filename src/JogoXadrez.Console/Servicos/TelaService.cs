@@ -18,9 +18,17 @@ namespace JogoXadrez.ConsoleApp.Servicos
             Console.WriteLine();
             Console.WriteLine("Turno: " + partida.Turno);
             Console.WriteLine("Aguardando jogada: " + partida.JogadorAtual);
-            if (partida.PartidaEmXeque)
+            if (!partida.Terminada)
             {
-                Console.WriteLine("XEQUE!");
+                if (partida.PartidaEmXeque)
+                {
+                    Console.WriteLine("XEQUE!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("XEQUEMATE!");
+                Console.WriteLine("Vencedor: " + partida.JogadorAtual);
             }
         }
 

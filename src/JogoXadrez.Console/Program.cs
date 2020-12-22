@@ -46,6 +46,8 @@ namespace ConsoleApp
                         Console.ReadLine();
                     }
                 }
+                Console.Clear();
+                TelaService.ImprimirPartida(partida);
 
 
             }
