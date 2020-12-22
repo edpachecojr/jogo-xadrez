@@ -1,0 +1,2 @@
+<h1 align="center">Jogo de Xadrez</h1>
+<p align="left">Implementação e extrapolação do projeto de jogo de xadrez apresentado na seção <b>Seção 12:Projeto: Sistema de jogo de xadrez</b> de jogo de xadrez do curso <a href="https://www.udemy.com/course/programacao-orientada-a-objetos-csharp/">🔗 C# COMPLETO 2020 Programação Orientada a Objetos + Projetos</a>.</p>
