@@ -54,7 +54,7 @@ namespace JogoXadrez.Domain.Entidades.Tabuleiro
             return false;
         }
 
-        public bool PodeMoverPara(Posicao posicao)
+        public bool MovimentoPossivel(Posicao posicao)
         {
             return this.MovimentosPossiveis()[posicao.Linha, posicao.Coluna];
         }

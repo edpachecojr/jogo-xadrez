@@ -103,7 +103,7 @@ namespace JogoXadrez.Domain.Servicos
         }
         public void ValidarPosicaoDestino(Posicao origem, Posicao destino)
         {
-            if (!this.Tabuleiro.GetPeca(origem).PodeMoverPara(destino))
+            if (!this.Tabuleiro.GetPeca(origem).MovimentoPossivel(destino))
             {
                 throw new TabuleiroException("Posição de destino inválida!");
             }
