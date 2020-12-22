@@ -74,7 +74,7 @@ namespace JogoXadrez.Domain.Servicos
                 this.PartidaEmXeque = false;
             }
 
-            if (this.VerificaXequeMate(this.Adversario(JogadorAtual)))
+            if (this.VerificaXequeMate(adversario))
             {
                 this._terminada = true;
             }
@@ -155,19 +155,25 @@ namespace JogoXadrez.Domain.Servicos
         }
         private void ColocarPecas()
         {
-            this.ColocarNovaPeca('c', 1, new Torre(this._tabuleiro, CorEnum.Branca));
-            this.ColocarNovaPeca('c', 2, new Torre(this._tabuleiro, CorEnum.Branca));
-            this.ColocarNovaPeca('d', 2, new Torre(this._tabuleiro, CorEnum.Branca));
-            this.ColocarNovaPeca('e', 2, new Torre(this._tabuleiro, CorEnum.Branca));
-            this.ColocarNovaPeca('e', 1, new Torre(this._tabuleiro, CorEnum.Branca));
-            this.ColocarNovaPeca('d', 1, new Rei(this._tabuleiro, CorEnum.Branca));
+            // this.ColocarNovaPeca('c', 1, new Torre(this._tabuleiro, CorEnum.Branca));
+            // this.ColocarNovaPeca('c', 2, new Torre(this._tabuleiro, CorEnum.Branca));
+            // this.ColocarNovaPeca('d', 2, new Torre(this._tabuleiro, CorEnum.Branca));
+            // this.ColocarNovaPeca('e', 2, new Torre(this._tabuleiro, CorEnum.Branca));
+            // this.ColocarNovaPeca('e', 1, new Torre(this._tabuleiro, CorEnum.Branca));
+            // this.ColocarNovaPeca('d', 1, new Rei(this._tabuleiro, CorEnum.Branca));
 
-            this.ColocarNovaPeca('c', 7, new Torre(this._tabuleiro, CorEnum.Preta));
-            this.ColocarNovaPeca('c', 8, new Torre(this._tabuleiro, CorEnum.Preta));
-            this.ColocarNovaPeca('d', 7, new Torre(this._tabuleiro, CorEnum.Preta));
-            this.ColocarNovaPeca('e', 7, new Torre(this._tabuleiro, CorEnum.Preta));
-            this.ColocarNovaPeca('e', 8, new Torre(this._tabuleiro, CorEnum.Preta));
-            this.ColocarNovaPeca('d', 8, new Rei(this._tabuleiro, CorEnum.Preta));
+            // this.ColocarNovaPeca('c', 7, new Torre(this._tabuleiro, CorEnum.Preta));
+            // this.ColocarNovaPeca('c', 8, new Torre(this._tabuleiro, CorEnum.Preta));
+            // this.ColocarNovaPeca('d', 7, new Torre(this._tabuleiro, CorEnum.Preta));
+            // this.ColocarNovaPeca('e', 7, new Torre(this._tabuleiro, CorEnum.Preta));
+            // this.ColocarNovaPeca('e', 8, new Torre(this._tabuleiro, CorEnum.Preta));
+            // this.ColocarNovaPeca('d', 8, new Rei(this._tabuleiro, CorEnum.Preta));
+            this.ColocarNovaPeca('c', 1, new Torre(this._tabuleiro, CorEnum.Branca));
+            this.ColocarNovaPeca('d', 1, new Rei(this._tabuleiro, CorEnum.Branca));
+            this.ColocarNovaPeca('h', 7, new Torre(this._tabuleiro, CorEnum.Branca));
+
+            this.ColocarNovaPeca('a', 8, new Rei(this._tabuleiro, CorEnum.Preta));
+            this.ColocarNovaPeca('b', 8, new Torre(this._tabuleiro, CorEnum.Preta));
         }
 
         public Tabuleiro Tabuleiro
@@ -226,7 +232,7 @@ namespace JogoXadrez.Domain.Servicos
         }
         public bool VerificaXequeMate(CorEnum cor)
         {
-            if (this.EstaEmXeque(cor))
+            if (!this.EstaEmXeque(cor))
             {
                 return false;
             }
@@ -239,10 +245,11 @@ namespace JogoXadrez.Domain.Servicos
                     {
                         if (mat[i, j])
                         {
+                            Posicao origem = x.Posicao;
                             Posicao destino = new Posicao(i, j);
-                            Peca pecaCapturada = this.ExecutaMovimento(x.Posicao, destino);
+                            Peca pecaCapturada = this.ExecutaMovimento(origem, destino);
                             bool testeXeque = this.EstaEmXeque(cor);
-                            this.DesfazMovimento(x.Posicao, destino, pecaCapturada);
+                            this.DesfazMovimento(origem, destino, pecaCapturada);
                             if (!testeXeque)
                             {
                                 return false;
