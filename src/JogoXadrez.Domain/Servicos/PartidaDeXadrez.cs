@@ -174,6 +174,7 @@ namespace JogoXadrez.Domain.Servicos
 
             this.ColocarNovaPeca('a', 8, new Rei(this._tabuleiro, CorEnum.Preta));
             this.ColocarNovaPeca('b', 8, new Torre(this._tabuleiro, CorEnum.Preta));
+            this.ColocarNovaPeca('d', 8, new Bispo(this._tabuleiro, CorEnum.Preta));
         }
 
         public Tabuleiro Tabuleiro
